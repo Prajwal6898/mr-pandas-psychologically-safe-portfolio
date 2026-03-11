@@ -18,6 +18,7 @@ This repo contains code of Mr. Panda's Portfolio for a Codrops article!! It's a 
 # Extra info
 
 - Won [FWA of the day!](https://thefwa.com/cases/mr-pandas-psychologically-safe-portfolio).
+- Won [SOTD on Awwwards!](https://www.awwwards.com/sites/mr-pandas-paper-portfolio).
 
 # Areas of improvement / things to do
 
