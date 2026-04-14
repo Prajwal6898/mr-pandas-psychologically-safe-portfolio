@@ -1,7 +1,6 @@
-import { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
 import * as THREE from "three";
-import { useLoader, useThree } from "@react-three/fiber";
-import { useEffect, useMemo } from "react";
+import { useLoader } from "@react-three/fiber";
+import { useMemo } from "react";
 
 export const useKTX2Texture = (
   textureUrl,
@@ -9,21 +8,13 @@ export const useKTX2Texture = (
   alphaTestValue = 0.6,
   side = "front"
 ) => {
-  const { gl } = useThree();
-
-  const texture = useLoader(KTX2Loader, textureUrl, (loader) => {
-    loader.setTranscoderPath("/basis/");
-    loader.detectSupport(gl);
-  });
-
-  useEffect(() => {
-    if (texture) {
-      gl.initTexture(texture);
-    }
-  }, [gl, texture]);
+  const texture = useLoader(THREE.TextureLoader, textureUrl);
 
   const material = useMemo(() => {
     if (!texture) return null;
+
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.flipY = false;
 
     return new THREE.MeshBasicMaterial({
       map: texture,
@@ -31,12 +22,9 @@ export const useKTX2Texture = (
       alphaTest: alphaTestValue,
       side: side === "front" ? THREE.FrontSide : THREE.DoubleSide,
     });
-  }, [texture, transparent, alphaTestValue]);
+  }, [texture, transparent, alphaTestValue, side]);
 
   return material;
 };
 
-useKTX2Texture.preload = (url) =>
-  useLoader.preload(KTX2Loader, url, (loader) => {
-    loader.setTranscoderPath("/basis/");
-  });
+useKTX2Texture.preload = (url) => useLoader.preload(THREE.TextureLoader, url);

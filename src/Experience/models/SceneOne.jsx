@@ -45,16 +45,16 @@ export default function Model(props) {
 
   const lerpFactor = 0.08;
 
-  const waterfallone = useKTX2Texture("/textures/waterfall_one.ktx2");
-  const waterfalltwo = useKTX2Texture("/textures/waterfall_two.ktx2");
+  const waterfallone = useKTX2Texture("/textures/waterfall_one.png");
+  const waterfalltwo = useKTX2Texture("/textures/waterfall_two.png");
   const not_waterfall = useKTX2Texture(
-    "/textures/not_waterfall.ktx2",
+    "/textures/not_waterfall.png",
     true,
     0.6,
     "double"
   );
-  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2");
-  const scene_1 = useKTX2Texture("/textures/scene_1.ktx2");
+  const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.png");
+  const scene_1 = useKTX2Texture("/textures/scene_1.png");
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;

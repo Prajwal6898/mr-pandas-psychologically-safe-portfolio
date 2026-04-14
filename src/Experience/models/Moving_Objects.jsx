@@ -8,8 +8,8 @@ import * as THREE from "three";
 export default function Model({ scrollProgress, ...props }) {
   const { nodes, materials } = useGLTF("/models/Moving_Extras.glb");
 
-  const material = useKTX2Texture("/textures/Moving_extras.ktx2");
-  const dirtMaterial = useKTX2Texture("/textures/dirt.ktx2");
+  const material = useKTX2Texture("/textures/Moving_extras.png");
+  const dirtMaterial = useKTX2Texture("/textures/dirt.png");
   const camelGroupRef = useRef();
   const camelFrontRightRef = useRef();
   const camelBackRightRef = useRef();
