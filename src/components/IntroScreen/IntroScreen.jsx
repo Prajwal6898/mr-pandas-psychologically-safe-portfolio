@@ -43,41 +43,6 @@ const IntroScreen = () => {
             ></div>
           </div>
         </div>
-
-        <a
-          href="https://www.youtube.com/watch?v=zyWD2E8AHCg"
-          className="tutorial-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            position: "absolute",
-            left: "50%",
-            bottom: "25%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "14px",
-            color: "#000000ff",
-            // textDecoration: "none",
-          }}
-        >
-          Watch tutorial here!!
-        </a>
-        <a
-          href="https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio"
-          className="credits-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            position: "absolute",
-            left: "50%",
-            bottom: "15%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "14px",
-            color: "#000000ff",
-            // textDecoration: "none",
-          }}
-        >
-          See full list of credits here!!
-        </a>
       </div>
     </>
   );
