@@ -1,8 +1,63 @@
 import React, { useRef, useMemo } from "react";
 import { useGLTF, useKTX2 } from "@react-three/drei";
-import { useKTX2Texture } from "../utils/ktxLoader";
+import { useKTX2Texture, useIconTexture } from "../utils/ktxLoader";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+
+const SOCIAL_ICONS = [
+  { key: "github", texture: "/textures/icons/github.png", url: "https://github.com/" },
+  { key: "x", texture: "/textures/icons/x.png", url: "https://x.com/" },
+  { key: "capsule", texture: "/textures/icons/capsule.png", url: "https://example.com/" },
+];
+
+const ICON_BASE_POSITION = [-3.6, 1.15, -2.55];
+const ICON_SIZE = 0.35;
+const ICON_SPACING = 0.5;
+
+function SocialIcon({ material, position, url, size }) {
+  const meshRef = useRef();
+  const hovered = useRef(false);
+  const baseScale = 1;
+  const hoverScale = 1.2;
+  const lerpFactor = 0.15;
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    const target = hovered.current ? hoverScale : baseScale;
+    meshRef.current.scale.x += (target - meshRef.current.scale.x) * lerpFactor;
+    meshRef.current.scale.y += (target - meshRef.current.scale.y) * lerpFactor;
+  });
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const handlePointerOver = (e) => {
+    e.stopPropagation();
+    hovered.current = true;
+    document.body.style.cursor = "pointer";
+  };
+
+  const handlePointerOut = (e) => {
+    e.stopPropagation();
+    hovered.current = false;
+    document.body.style.cursor = "auto";
+  };
+
+  return (
+    <mesh
+      ref={meshRef}
+      position={position}
+      material={material}
+      onClick={handleClick}
+      onPointerOver={handlePointerOver}
+      onPointerOut={handlePointerOut}
+    >
+      <planeGeometry args={[size, size]} />
+    </mesh>
+  );
+}
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene_1.glb");
@@ -55,6 +110,11 @@ export default function Model(props) {
   );
   const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.png");
   const scene_1 = useKTX2Texture("/textures/scene_1.png");
+
+  const githubIconMat = useIconTexture(SOCIAL_ICONS[0].texture);
+  const xIconMat = useIconTexture(SOCIAL_ICONS[1].texture);
+  const capsuleIconMat = useIconTexture(SOCIAL_ICONS[2].texture);
+  const iconMaterials = [githubIconMat, xIconMat, capsuleIconMat];
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
@@ -300,6 +360,19 @@ export default function Model(props) {
         position={[-10.711, 0.873, -2.351]}
         rotation={[-Math.PI / 2, 0.134, -Math.PI]}
       />
+      {SOCIAL_ICONS.map((icon, i) => (
+        <SocialIcon
+          key={icon.key}
+          material={iconMaterials[i]}
+          size={ICON_SIZE}
+          url={icon.url}
+          position={[
+            ICON_BASE_POSITION[0] + i * ICON_SPACING,
+            ICON_BASE_POSITION[1],
+            ICON_BASE_POSITION[2],
+          ]}
+        />
+      ))}
     </group>
   );
 }

@@ -28,3 +28,25 @@ export const useKTX2Texture = (
 };
 
 useKTX2Texture.preload = (url) => useLoader.preload(THREE.TextureLoader, url);
+
+export const useIconTexture = (
+  textureUrl,
+  alphaTestValue = 0.2,
+) => {
+  const texture = useLoader(THREE.TextureLoader, textureUrl);
+
+  const material = useMemo(() => {
+    if (!texture) return null;
+
+    texture.colorSpace = THREE.SRGBColorSpace;
+
+    return new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      alphaTest: alphaTestValue,
+      side: THREE.DoubleSide,
+    });
+  }, [texture, alphaTestValue]);
+
+  return material;
+};
