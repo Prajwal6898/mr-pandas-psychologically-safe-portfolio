@@ -1,13 +1,12 @@
-import React, { useRef, useMemo } from "react";
-import { useGLTF, useKTX2 } from "@react-three/drei";
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
 import { useKTX2Texture, useIconTexture } from "../utils/ktxLoader";
 import { useFrame } from "@react-three/fiber";
-import * as THREE from "three";
 
 const SOCIAL_ICONS = [
-  { key: "github", texture: "/textures/icons/github.png", url: "https://github.com/" },
+  { key: "github", texture: "/textures/icons/github.png", url: "https://github.com/Elonmarket/mista-ponda" },
   { key: "x", texture: "/textures/icons/x.png", url: "https://x.com/" },
-  { key: "capsule", texture: "/textures/icons/capsule.png", url: "https://example.com/" },
+  { key: "capsule", texture: "/textures/icons/capsule.png", url: "https://pump.fun/" },
 ];
 
 const ICON_BASE_POSITION = [-18.15, 1.1, -2.7];
