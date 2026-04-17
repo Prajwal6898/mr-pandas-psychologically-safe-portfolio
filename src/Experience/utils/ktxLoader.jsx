@@ -50,3 +50,5 @@ export const useIconTexture = (
 
   return material;
 };
+
+useIconTexture.preload = (url) => useLoader.preload(THREE.TextureLoader, url);
