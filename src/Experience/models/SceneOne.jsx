@@ -10,9 +10,9 @@ const SOCIAL_ICONS = [
   { key: "capsule", texture: "/textures/icons/capsule.png", url: "https://example.com/" },
 ];
 
-const ICON_BASE_POSITION = [-3.6, 1.15, -2.55];
+const ICON_BASE_POSITION = [-18.15, 1.1, -2.7];
 const ICON_SIZE = 0.35;
-const ICON_SPACING = 0.5;
+const ICON_SPACING = 0.45;
 
 function SocialIcon({ material, position, url, size }) {
   const meshRef = useRef();
